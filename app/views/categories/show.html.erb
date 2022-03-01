@@ -6,3 +6,14 @@
 <%= link_to 'Edit', edit_category_path(@category) %>
 <%= link_to 'Back', categories_path %>
 <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: "Are you sure?" } %>
+
+<%= render @category.tasks, category: @category %>
+
+<h2>Add a task</h2>
+<%= link_to "New task", new_category_task_url(@category, @category.tasks) %>
+
+
+<% if false %>
+<%= @category.tasks.ancestors %>
+<%= render 'tasks/form', { category: @category }%>
+<% end %>
