@@ -3,14 +3,16 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    @tasks = []
-    current_user.categories.each do |category|
-      category.tasks.each do |task|
-        @tasks << task
-      end
-    end
-
-    # @tasks = current_user.tasks
+  # Note: If you don't use the has_many <method_name>, :through <method_name> in models,
+  # do the comment out codes below
+    # @tasks = []
+    # current_user.categories.each do |category|
+    #   category.tasks.each do |task|
+    #     @tasks << task
+    #   end
+    # end
+    
+    @tasks = current_user.tasks
   end
 
   def show
