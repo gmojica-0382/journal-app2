@@ -1,19 +1,30 @@
 class TasksController < ApplicationController
-  before_action :set_category
+  before_action :set_category, except: %i[ index ]
   before_action :set_task, only: %i[ show edit update destroy ]
+
+  def index
+    @tasks = []
+    current_user.categories.each do |category|
+      category.tasks.each do |task|
+        @tasks << task
+      end
+    end
+
+    # @tasks = current_user.tasks
+  end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = @category.tasks.build
   end
 
   def edit
   end
 
   def create
-    @task = @category.tasks.new(task_params)
+    @task = @category.tasks.build(task_params)
 
     if @task.save
       redirect_to category_url(@category), notice: "Task was successfully created."
@@ -37,11 +48,18 @@ class TasksController < ApplicationController
 
   private
   def set_category
-    @category = Category.find(params[:category_id])
+    @category = current_user.categories.find_by_id(params[:category_id])
+    
+    if @category == nil
+      redirect_to root_url, notice: "No category id #{params[:category_id]} found" 
+    end
   end
 
   def set_task
-    @task = @category.tasks.find(params[:id])
+    @task = @category.tasks.find_by_id(params[:id])
+    if @task == nil
+      redirect_to category_url(@category), notice: "No task id #{params[:id]} found" 
+    end
   end
 
   def task_params
