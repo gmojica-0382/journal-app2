@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JournalApp2</title>
+    <title>NoteIt</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -19,9 +19,10 @@
     <div class="container">
       <%= render partial: "shared/flash" %>
       
-      <div class="yield-container mt-4">
-        <%= yield %>
-      </div>
+        <div class="yield-container mt-4">
+          <%= yield %>
+        </div>
     </div>
+
   </body>
 </html>

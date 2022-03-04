@@ -1,5 +1,6 @@
-<% if notice %>
+<% if notice || alert %>
   <div class="alert alert-success mt-4" role="alert">
     <p id="notice"><%= notice %>
+    <p id="alert"><%= alert %>
   </div>
 <% end %>
