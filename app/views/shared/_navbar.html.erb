@@ -7,11 +7,23 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <%= link_to "Tasks", tasks_url(current_user), class: "nav-link" %>
+
+            Logged in as <%= current_user.email %>
+            <%= link_to 'Edit profile', edit_user_registration_path %>
             <%= link_to "Logout", destroy_user_session_url, method: :delete, class: "nav-link" %>
         </div>
       </div>
+
     <% else %>
-      <span class="navbar-brand" >NoteIt</span>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <%= link_to "NoteIt", root_path, class: "navbar-brand" %>
+
+            <%= link_to "Sign up", new_user_registration_path %> |
+            <%= link_to "Login", new_user_session_path %>
+        </div>
+      </div>
+
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
