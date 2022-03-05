@@ -2,5 +2,6 @@
 
 <%= render 'form', { category: @category, task: @task } %>
 
+<%= link_to 'To All Tasks', tasks_url(@tasks) %> |
+<%= link_to 'To Category', category_url(@category) %> |
 <%= link_to "Show", category_task_url(@category, @task) %>
-<%= link_to "Back", category_url(@category) %>
