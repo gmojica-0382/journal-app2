@@ -11,8 +11,20 @@ class TasksController < ApplicationController
     #     @tasks << task
     #   end
     # end
-    
-    @tasks = current_user.tasks
+    @date_today = Date.current
+    # @overdue = current_user.tasks.where("date < ? ", @date_today) != @date_today
+    # current_user.tasks.each do |task|
+    #   @overdue << task
+    # end 
+
+    day = params[:day]
+    if !day.nil?
+      @tasks = current_user.tasks.where(:date => day)
+    # elsif @overdue
+    #   @tasks = current_user.tasks.where("date < ? ", @date_today)
+    else
+      @tasks = current_user.tasks
+    end
   end
 
   def show
@@ -52,14 +64,14 @@ class TasksController < ApplicationController
   def set_category
     @category = current_user.categories.find_by_id(params[:category_id])
     
-    if @category == nil
+    if @category.nil?
       redirect_to root_url, notice: "No category id #{params[:category_id]} found" 
     end
   end
 
   def set_task
     @task = @category.tasks.find_by_id(params[:id])
-    if @task == nil
+    if @task.nil?
       redirect_to category_url(@category), notice: "No task id #{params[:id]} found" 
     end
   end
