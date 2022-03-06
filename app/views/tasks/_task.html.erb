@@ -1,7 +1,8 @@
 <p>
   <strong>
+    <%= @tasks ? "#{task.category.title} Category" : nil %> <br>
     <%= task.title %> <br>
-    <%= task.date %>
+    <%= task.date.strftime('%b %e, %Y') %>
   </strong>
 </p>
 
