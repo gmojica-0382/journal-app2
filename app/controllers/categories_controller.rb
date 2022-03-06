@@ -61,7 +61,7 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = current_user.categories.find_by_id(params[:id])
-       if @category == nil
+       if @category.nil?
         redirect_to root_url, notice: "No category id #{params[:id]} found"
        end
     end
