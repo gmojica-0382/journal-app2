@@ -11,17 +11,16 @@ class TasksController < ApplicationController
     #     @tasks << task
     #   end
     # end
-    @date_today = Date.current
-    # @overdue = current_user.tasks.where("date < ? ", @date_today) != @date_today
+    @date_today = Date.current.strftime('%b %e, %Y')
+    # @overdue = current_user.tasks.where("date < ? ", @date_today)
+    # @overdue = []
     # current_user.tasks.each do |task|
     #   @overdue << task
     # end 
 
     day = params[:day]
-    if !day.nil?
+    if day
       @tasks = current_user.tasks.where(:date => day)
-    # elsif @overdue
-    #   @tasks = current_user.tasks.where("date < ? ", @date_today)
     else
       @tasks = current_user.tasks
     end
