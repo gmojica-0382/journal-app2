@@ -2,7 +2,4 @@
 
 <%= render @tasks %>
 
-<p>
-  <%= link_to "All Tasks", tasks_url %> |
-  <%= link_to "Today", tasks_url(:day => @date_today) %><br>
-</p>
+<%= render "tasks/links_tasks"%>
