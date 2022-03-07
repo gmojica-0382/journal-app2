@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   get "tasks", to: "tasks#index"
+  get "tasks/overdue", to: "tasks#overdue"
+  get "tasks/after_today", to: "tasks#after_today"
 
   resources :categories do
     resources :tasks, except: :index
