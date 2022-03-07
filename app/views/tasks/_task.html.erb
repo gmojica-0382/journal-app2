@@ -1,6 +1,6 @@
 <p>
   <strong>
-    <%= @tasks ? "#{task.category.title} Category" : nil %> <br>
+    <%= @tasks ? (link_to "#{task.category.title} Category", task.category) : nil %> <br>
     <%= task.title %> <br>
     <%= task.date.strftime('%b %e, %Y') %>
   </strong>
