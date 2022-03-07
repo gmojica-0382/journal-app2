@@ -26,7 +26,7 @@ class TasksController < ApplicationController
   end
 
   def after_today
-    @tasks = current_user.tasks.where("date > ? ", @date_today)
+    @tasks = current_user.tasks.where("date > ? ", @date_today).order("date ASC")
   end
 
   def show
