@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_category, except: %i[ index ]
+  before_action :set_date_today, only: %i[ index overdue after_today ]
+  before_action :set_category, except: %i[ index overdue after_today ]
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
@@ -11,12 +12,6 @@ class TasksController < ApplicationController
     #     @tasks << task
     #   end
     # end
-    @date_today = Date.current.strftime('%b %e, %Y')
-    # @overdue = current_user.tasks.where("date < ? ", @date_today)
-    # @overdue = []
-    # current_user.tasks.each do |task|
-    #   @overdue << task
-    # end 
 
     day = params[:day]
     if day
@@ -24,6 +19,14 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks
     end
+  end
+
+  def overdue
+    @tasks = current_user.tasks.where("date < ? ", @date_today)
+  end
+
+  def after_today
+    @tasks = current_user.tasks.where("date > ? ", @date_today)
   end
 
   def show
@@ -73,6 +76,10 @@ class TasksController < ApplicationController
     if @task.nil?
       redirect_to category_url(@category), notice: "No task id #{params[:id]} found" 
     end
+  end
+
+  def set_date_today
+    @date_today = Date.current.strftime('%b %e, %Y')
   end
 
   def task_params
