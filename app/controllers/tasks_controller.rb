@@ -15,7 +15,7 @@ class TasksController < ApplicationController
 
     day = params[:day]
     if day
-      @tasks = current_user.tasks.where(:date => day)
+      @tasks = current_user.tasks.where(date: day)
     else
       @tasks = current_user.tasks
     end

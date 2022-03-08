@@ -1,6 +1,6 @@
 <p>
   <%= link_to "All Tasks", tasks_url %> |
-  <%= link_to "Today", tasks_url(:day => @date_today) %><br>
+  <%= link_to "Today", tasks_url(day: @date_today) %><br>
   <%= link_to "Overdue", tasks_overdue_url %> <br>
   <%= link_to "After Today", tasks_after_today_url %> <br>
 </p>
